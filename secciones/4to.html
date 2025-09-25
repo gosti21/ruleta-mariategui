@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruleta 4to - Colegio José Carlos Mariátegui</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body
+    class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 min-h-screen flex flex-col items-center justify-center"
+  >
+    <h1 class="text-3xl font-bold text-white mb-6">Ruleta - 4to</h1>
+
+    <canvas id="ruletaCanvas" width="500" height="500"></canvas>
+    <button 
+  id="spinBtn" 
+  class="mt-6 px-10 py-4 text-2xl font-bold text-white bg-red-500 rounded-xl shadow-lg hover:bg-red-600 transform hover:scale-110 transition duration-200"
+>
+  🎰 ¡Girar!
+</button>
+
+    <!-- Mensaje flotante -->
+    <div id="ganadorMsg"></div>
+    <!-- Botón para volver -->
+<a href="../index.html" 
+   class="mt-6 inline-block px-6 py-3 bg-yellow-400 text-black font-bold rounded-lg shadow-lg hover:bg-yellow-500 transition">
+  ⬅️ Volver al Inicio
+</a>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="../js/ruleta.js"></script>
+    <script>
+      const alumnos4to = [
+        "4to - Lulo Benites, Eric José",
+        "1ro - Ccencho Palomino, Deisy",
+        "4to - Valencia Perez, Judy Paola",
+        "4to - Llancari Hinostroza, Anthony",
+        "4to - Taipe de la Cruz, Sheydi",
+      ];
+      inicializarRuleta(alumnos4to);
+
+      document.getElementById("spinBtn").addEventListener("click", girarRuleta);
+    </script>
+  </body>
+</html>

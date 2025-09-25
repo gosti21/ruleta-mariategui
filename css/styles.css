@@ -1,0 +1,35 @@
+/* Estilo del canvas */
+#ruletaCanvas {
+  border: 10px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(255,255,255,0.3);
+}
+
+/* Botón girar */
+#spinBtn {
+  @apply mt-6 px-8 py-4 bg-green-500 text-white font-bold text-xl rounded-2xl shadow-lg hover:bg-green-700 transition duration-300;
+}
+
+/* Mensaje flotante ganador */
+#ganadorMsg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 2rem;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  z-index: 9999;
+  transition: transform 0.4s ease;
+}
+
+#ganadorMsg.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}

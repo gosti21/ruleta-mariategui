@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruleta 2do - Colegio José Carlos Mariátegui</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body
+    class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 min-h-screen flex flex-col items-center justify-center"
+  >
+    <h1 class="text-3xl font-bold text-white mb-6">Ruleta - 2do</h1>
+
+    <canvas id="ruletaCanvas" width="500" height="500"></canvas>
+    <button
+      id="spinBtn"
+      class="mt-6 px-10 py-4 text-2xl font-bold text-white bg-red-500 rounded-xl shadow-lg hover:bg-red-600 transform hover:scale-110 transition duration-200"
+    >
+      🎰 ¡Girar!
+    </button>
+
+    <!-- Mensaje flotante -->
+    <div id="ganadorMsg"></div>
+    <!-- Botón para volver -->
+<a href="../index.html" 
+   class="mt-6 inline-block px-6 py-3 bg-yellow-400 text-black font-bold rounded-lg shadow-lg hover:bg-yellow-500 transition">
+  ⬅️ Volver al Inicio
+</a>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="../js/ruleta.js"></script>
+    <script>
+      const alumnos2do = [
+        "2do - Sarmiento Zevallos, Kenia Yhadira",
+        "2do - Illanes Zevallos, Fray",
+        "2do - Matos Aguilar, Zaret",
+        "2do - Neftali Kelita Mauricio Pariona",
+        "2do - Shary Eveling Alfaro Pare",
+        "2do - Córdova Olivera, Briana Zamikay",
+        "2do - Pallarco Tello, Miguel Ángel",
+        "2do - Pucllas Quispe, Josue",
+        "2do - Moinie Rosales, Antonio Bahran",
+        "2do - Contreras Gomez, Blanca Tasshayi",
+        "2do - Calderon Mendoza, Angie Carol",
+        "2do - Escalante Llanos, Sofía Luz",
+      ];
+      inicializarRuleta(alumnos2do);
+
+      document.getElementById("spinBtn").addEventListener("click", girarRuleta);
+    </script>
+  </body>
+</html>
