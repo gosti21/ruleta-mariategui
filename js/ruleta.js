@@ -23,7 +23,7 @@ function lanzarConfeti() {
 }
 
 // -------- sonido -------------
-const spinSound = new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
+const spinSound = new Audio("../assets/sounds/ruleta.mp3");
 
 const winSound = new Audio("https://www.myinstants.com/media/sounds/tadaa.mp3");
 // -------- ruleta -------------
