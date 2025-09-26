@@ -22,12 +22,12 @@ function lanzarConfeti() {
   })();
 }
 
-// -------- sonido -------------
+// -------- sonidos -------------
 const spinSound = new Audio("../assets/sounds/ruleta.mp3");
-
 const winSound = new Audio("https://www.myinstants.com/media/sounds/tadaa.mp3");
+
 // -------- ruleta -------------
-let opciones = []; // lista de alumnos por sección
+let opciones = []; // lista de alumnos
 let startAngle = 0;
 let arc = 0;
 let spinTimeout = null;
@@ -46,10 +46,10 @@ const colores = [
 ];
 
 // settings de diseño
-const CANVAS_SIZE = 500; // tamaño "visual" en px
-const MIN_FONT = 9;      // tamaño mínimo de fuente
-const MAX_FONT = 22;     // tamaño máximo inicial
-const TEXT_RADIUS_RATIO = 0.62; // distancia radial para el texto (relación al radio)
+const CANVAS_SIZE = 500;
+const MIN_FONT = 9;
+const MAX_FONT = 22;
+const TEXT_RADIUS_RATIO = 0.62;
 
 function setupCanvasHiDPI() {
   if (!canvas || !ctx) return;
@@ -129,6 +129,7 @@ function dibujarRuleta() {
   ctx.arc(centerX, centerY, radius + 3, 0, Math.PI * 2);
   ctx.stroke();
 
+  // flechita superior
   ctx.fillStyle = "black";
   ctx.beginPath();
   ctx.moveTo(centerX - 10, 6);
@@ -139,6 +140,8 @@ function dibujarRuleta() {
 }
 
 function girarRuleta() {
+  if (opciones.length === 0) return; // nada que girar
+
   spinAngleStart = Math.random() * 30 + 20;
   spinTime = 0;
   spinTimeTotal = Math.random() * 2000 + 3000;
@@ -171,21 +174,36 @@ function detenerGiro() {
   let arcd = (arc * 180) / Math.PI;
   let index = Math.floor((360 - (degrees % 360)) / arcd) % opciones.length;
   if (index < 0) index += opciones.length;
-  const text = opciones[index];
+  const ganador = opciones[index];
 
   const msg = document.getElementById("ganadorMsg");
   if (msg) {
-    msg.textContent = "🎉 ¡Ganador: " + text + " 🎉";
+    msg.textContent = "🎉 ¡Ganador: " + ganador + " 🎉";
     msg.classList.add("show");
   }
-  lanzarConfeti();
 
-  // reproducir sonido de ganador
+  lanzarConfeti();
   winSound.play();
 
   setTimeout(() => {
     if (msg) msg.classList.remove("show");
   }, 3500);
+
+  // --- 🚀 Eliminar el ganador de la lista ---
+  opciones.splice(index, 1);
+
+  // Si ya no quedan nombres
+  if (opciones.length === 0) {
+    setTimeout(() => {
+      if (msg) msg.textContent = "✅ ¡Ya no quedan nombres!";
+    }, 3600);
+    return;
+  }
+
+  // Redibujar con los nombres restantes
+  setTimeout(() => {
+    dibujarRuleta();
+  }, 1000);
 }
 
 function easeOut(t, b, c, d) {
@@ -194,6 +212,7 @@ function easeOut(t, b, c, d) {
   return b + c * (tc + -3 * ts + 3 * t);
 }
 
+// listeners
 document.getElementById("spinBtn")?.addEventListener("click", girarRuleta);
 
 window.addEventListener("resize", () => {
